@@ -1,0 +1,43 @@
+apiVersion: "batch/v1"
+kind: "Job"
+metadata:
+  name: {{ include "sealed-secrets-monitor.jobName" . }}
+  labels:
+    {{- include "sealed-secrets-monitor.labels" . | nindent 4 }}
+  {{- with .Values.job.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  ttlSecondsAfterFinished: 60
+  template:
+    metadata:
+      labels:
+        {{- include "sealed-secrets-monitor.labels" . | nindent 8 }}
+    spec:
+      restartPolicy: "Never"
+      serviceAccountName: {{ include "sealed-secrets-monitor.serviceAccountName" . }}
+      containers:
+        - name: "sealed-secrets-monitor"
+          securityContext: {{ toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}{{ .Values.image.hash }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
+          command:
+            - "/bin/bash"
+            - "/app/wait_for_secrets.sh"
+          volumeMounts:
+            - name: "wait-for-secrets"
+              mountPath: "/app"
+              readOnly: true
+              defaultMode: 0755
+          resources: {{- toYaml $.Values.resources | nindent 12 }}
+          env:
+            - name: NAMESPACE
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "sealed-secrets-monitor.configMapName" . }}
+                  key: namespace
+      volumes:
+        - name: "wait-for-secrets"
+          configMap:
+                name: {{ include "sealed-secrets-monitor.configMapName" . }}

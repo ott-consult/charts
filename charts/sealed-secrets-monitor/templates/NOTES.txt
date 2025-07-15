@@ -1,0 +1,4 @@
+The application comes in form of a job that waits for all sealed secrets to be extracted.
+Install the job in the same namespace as the sealed secrets and run it. It will loop until there is a secret for
+every sealed secret. This helps tools like Argo CD with the synchronization.
+

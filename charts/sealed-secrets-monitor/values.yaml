@@ -1,0 +1,51 @@
+# Default values for sealed-secrets-monitor.
+
+# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
+image:
+  repository: docker.io/bitnami/kubectl
+  pullPolicy: IfNotPresent
+  tag: '1.33.2'
+  hash: '@sha256:e706851b19c0c4e668614b7c5a6b0c5bbcfbe7fb73f5d999250e0da8bfff42c6'
+
+# This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+configMap:
+  annotations: {}
+  name: ""
+
+serviceAccount:
+  create: true
+  automount: true
+  annotations: {}
+  name: ""
+
+role:
+  annotations: {}
+  name: ""
+
+roleBinding:
+  annotations: {}
+  name: ""
+
+job:
+  annotations: {}
+  name: ""
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  privileged: false
+  readOnlyRootFilesystem: true
+  runAsGroup: 1000
+  runAsNonRoot: true
+  runAsUser: 1000
+  seLinuxOptions: null
+  seccompProfile:
+    type: RuntimeDefault
+
+resources: {}
