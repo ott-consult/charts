@@ -1,0 +1,309 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "properties": {
+    "configMap": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the config map",
+          "required": [],
+          "title": "annotations"
+        },
+        "name": {
+          "default": "a name is generated using the fullname template",
+          "description": "The name of the config map storing the env var and script.",
+          "required": [],
+          "title": "name"
+        }
+      },
+      "required": [],
+      "title": "configMap",
+      "type": "object"
+    },
+    "extraObjects": {
+      "description": "Array of extra K8s manifests to deploy # Note: Supports use of custom Helm templates",
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "extraObjects"
+    },
+    "fullnameOverride": {
+      "default": "",
+      "required": [],
+      "title": "fullnameOverride",
+      "type": "string"
+    },
+    "global": {
+      "description": "Global values are values that can be accessed from any chart or subchart by exactly the same name.",
+      "required": [],
+      "title": "global",
+      "type": "object"
+    },
+    "image": {
+      "additionalProperties": false,
+      "properties": {
+        "hash": {
+          "default": "@sha256:e706851b19c0c4e668614b7c5a6b0c5bbcfbe7fb73f5d999250e0da8bfff42c6",
+          "description": "Hash of the specific container image for that version",
+          "required": [],
+          "title": "hash"
+        },
+        "pullPolicy": {
+          "default": "IfNotPresent",
+          "required": [],
+          "title": "pullPolicy",
+          "type": "string"
+        },
+        "repository": {
+          "default": "docker.io/bitnami/kubectl",
+          "description": "Container image containing kubectl",
+          "required": [],
+          "title": "repository"
+        },
+        "tag": {
+          "default": "1.33.2",
+          "description": "Version of the container image containing kubectl",
+          "pattern": "^(?P\u003cmajor\u003e0|[1-9]\\d*)\\.(?P\u003cminor\u003e0|[1-9]\\d*)\\.(?P\u003cpatch\u003e0|[1-9]\\d*)(?:-(?P\u003cprerelease\u003e(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+(?P\u003cbuildmetadata\u003e[0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+          "required": [],
+          "title": "tag"
+        }
+      },
+      "required": [
+        "pullPolicy"
+      ],
+      "title": "image",
+      "type": "object"
+    },
+    "imagePullSecrets": {
+      "items": {
+        "required": []
+      },
+      "required": [],
+      "title": "imagePullSecrets",
+      "type": "array"
+    },
+    "job": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the config map",
+          "required": [],
+          "title": "annotations"
+        },
+        "name": {
+          "default": "a name is generated using the fullname template",
+          "description": "The name of the monitoring job waiting for sealed secrets to unpack.",
+          "required": [],
+          "title": "name"
+        }
+      },
+      "required": [],
+      "title": "job",
+      "type": "object"
+    },
+    "nameOverride": {
+      "default": "",
+      "required": [],
+      "title": "nameOverride",
+      "type": "string"
+    },
+    "resources": {
+      "additionalProperties": false,
+      "required": [],
+      "title": "resources",
+      "type": "object"
+    },
+    "role": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the config map",
+          "required": [],
+          "title": "annotations"
+        },
+        "name": {
+          "default": "a name is generated using the fullname template",
+          "description": "The name of the role granted top the service account.",
+          "required": [],
+          "title": "name"
+        }
+      },
+      "required": [],
+      "title": "role",
+      "type": "object"
+    },
+    "roleBinding": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the config map",
+          "required": [],
+          "title": "annotations"
+        },
+        "name": {
+          "default": "a name is generated using the fullname template",
+          "description": "The name of the role binding specifying the permissions needed by the monitoring job.",
+          "required": [],
+          "title": "name"
+        }
+      },
+      "required": [],
+      "title": "roleBinding",
+      "type": "object"
+    },
+    "securityContext": {
+      "additionalProperties": false,
+      "properties": {
+        "allowPrivilegeEscalation": {
+          "default": false,
+          "required": [],
+          "title": "allowPrivilegeEscalation",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "additionalProperties": false,
+          "properties": {
+            "drop": {
+              "items": {
+                "anyOf": [
+                  {
+                    "required": [],
+                    "type": "string"
+                  }
+                ],
+                "required": []
+              },
+              "required": [],
+              "title": "drop",
+              "type": "array"
+            }
+          },
+          "required": [
+            "drop"
+          ],
+          "title": "capabilities",
+          "type": "object"
+        },
+        "privileged": {
+          "default": false,
+          "required": [],
+          "title": "privileged",
+          "type": "boolean"
+        },
+        "readOnlyRootFilesystem": {
+          "default": true,
+          "required": [],
+          "title": "readOnlyRootFilesystem",
+          "type": "boolean"
+        },
+        "runAsGroup": {
+          "default": 1000,
+          "required": [],
+          "title": "runAsGroup",
+          "type": "integer"
+        },
+        "runAsNonRoot": {
+          "default": true,
+          "required": [],
+          "title": "runAsNonRoot",
+          "type": "boolean"
+        },
+        "runAsUser": {
+          "default": 1000,
+          "required": [],
+          "title": "runAsUser",
+          "type": "integer"
+        },
+        "seLinuxOptions": {
+          "default": "null",
+          "required": [],
+          "title": "seLinuxOptions",
+          "type": "null"
+        },
+        "seccompProfile": {
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "default": "RuntimeDefault",
+              "required": [],
+              "title": "type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "seccompProfile",
+          "type": "object"
+        }
+      },
+      "required": [
+        "allowPrivilegeEscalation",
+        "capabilities",
+        "privileged",
+        "readOnlyRootFilesystem",
+        "runAsGroup",
+        "runAsNonRoot",
+        "runAsUser",
+        "seLinuxOptions",
+        "seccompProfile"
+      ],
+      "title": "securityContext",
+      "type": "object"
+    },
+    "serviceAccount": {
+      "additionalProperties": false,
+      "properties": {
+        "annotations": {
+          "additionalProperties": false,
+          "description": "Annotations to add to the service account",
+          "required": [],
+          "title": "annotations"
+        },
+        "automount": {
+          "default": true,
+          "required": [],
+          "title": "automount",
+          "type": "boolean"
+        },
+        "create": {
+          "default": "true",
+          "description": "Specifies whether a service account should be created",
+          "required": [],
+          "title": "create"
+        },
+        "name": {
+          "default": "a name is generated using the fullname template",
+          "description": "The name of the service account used for the monitoring job.",
+          "required": [],
+          "title": "name"
+        }
+      },
+      "required": [
+        "automount"
+      ],
+      "title": "serviceAccount",
+      "type": "object"
+    }
+  },
+  "required": [
+    "image",
+    "imagePullSecrets",
+    "nameOverride",
+    "fullnameOverride",
+    "configMap",
+    "serviceAccount",
+    "role",
+    "roleBinding",
+    "job",
+    "securityContext",
+    "resources"
+  ],
+  "type": "object"
+}

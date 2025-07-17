@@ -1,6 +1,28 @@
 apiVersion: v2
 name: sealed-secrets-monitor
-description: A job that monitors unsealing of sealed secrets
+description: |
+  Helm chart to create a job that waits for [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) to unseal.
+  It can be used in conjunction with [Argo CD](https://argo-cd.readthedocs.io/en/stable/) to wait not only for the
+  sealed secrets to be snychronized but also to be unsealed.
+
+  ## Usage
+
+  ### Variant a
+
+  Deploy this helm chart as a sub chart alongside the sealed secrets you want to monitor.
+
+  ### Variant b
+  Use the value extraObjects to include the sealed secrets and deploy this chart:
+  ```
+  cat *.sealed-secret.yaml | yq ea '[.] | {"extraObjects": . }' >sealed-secrets-monitor-custom-values.yaml
+  helm repo add joernott https://joernott.github.io/charts --force-update
+      helm install \
+      sealed-secrets-monitor joernott/sealed-secrets-monitor \
+      --namespace "myapp" \
+      --create-namespace \
+      --version "{{ template "chart.version" . }}" \
+      -f "sealed-secrets-monitor-custom-values.yaml"
+  ```
 type: application
 version: 0.1.0
 appVersion: "1.33.2"
@@ -8,6 +30,7 @@ icon: data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBI
 keywords:
   - sealed-secrets
   - argocd
+home: https://github.com/joernott/charts/tree/main/charts/sealed-secrets-monitor
 maintainers:
   - name: joernott
     email: joernott@users.noreply.github.com

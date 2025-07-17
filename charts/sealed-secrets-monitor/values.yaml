@@ -1,37 +1,58 @@
+# yaml-language-server: $schema=values.schema.json
 # Default values for sealed-secrets-monitor.
 
-# This sets the container image more information can be found here: https://kubernetes.io/docs/concepts/containers/images/
 image:
+  # -- Container image containing kubectl
   repository: docker.io/bitnami/kubectl
   pullPolicy: IfNotPresent
+  # @schema
+  # pattern: ^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$
+  # @schema
+  # -- Version of the container image containing kubectl
   tag: '1.33.2'
+  # -- Hash of the specific container image for that version
   hash: '@sha256:e706851b19c0c4e668614b7c5a6b0c5bbcfbe7fb73f5d999250e0da8bfff42c6'
 
-# This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
 configMap:
+  # -- Annotations to add to the config map
   annotations: {}
+  # -- The name of the config map storing the env var and script.
+  # @default -- a name is generated using the fullname template
   name: ""
 
 serviceAccount:
+  # -- Specifies whether a service account should be created
   create: true
   automount: true
+  # -- Annotations to add to the service account
   annotations: {}
+  # -- The name of the service account used for the monitoring job.
+  # @default -- a name is generated using the fullname template
   name: ""
 
 role:
+  # -- Annotations to add to the config map
   annotations: {}
+  # -- The name of the role granted top the service account.
+  # @default -- a name is generated using the fullname template
   name: ""
 
 roleBinding:
+  # -- Annotations to add to the config map
   annotations: {}
+  # -- The name of the role binding specifying the permissions needed by the monitoring job.
+  # @default -- a name is generated using the fullname template
   name: ""
 
 job:
+  # -- Annotations to add to the config map
   annotations: {}
+  # -- The name of the monitoring job waiting for sealed secrets to unpack.
+  # @default -- a name is generated using the fullname template
   name: ""
 
 securityContext:
