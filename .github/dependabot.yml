@@ -12,3 +12,15 @@ updates:
   directory: "/"
   schedule:
     interval: "weekly"
+
+registries:
+  dockerio: # Define access for a private registry
+    type: docker-registry
+    url: docker.io
+    username: joernott
+    password: ${{secrets.DOCKERHUB_PASSWORD}}
+  dockercom: # Define access for a private registry
+    type: docker-registry
+    url: docker.com
+    username: joernott
+    password: ${{secrets.DOCKERHUB_PASSWORD}}
