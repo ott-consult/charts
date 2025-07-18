@@ -1,6 +1,7 @@
 # charts
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Static Badge](https://img.shields.io/badge/gpg-71C590A765F752B9FEFCC4DF9AE0A5E8B053F8AE-blue)](https://keys.openpgp.org/search?q=signing%40ott-consult.de)
 
 This repository contains various Helm charts used by me and my customers:
 
