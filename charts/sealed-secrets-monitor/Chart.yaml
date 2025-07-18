@@ -34,3 +34,7 @@ home: https://github.com/joernott/charts/tree/main/charts/sealed-secrets-monitor
 maintainers:
   - name: joernott
     email: joernott@users.noreply.github.com
+annotations:
+  artifacthub.io/signKey: |
+    fingerprint: 2EAE29FDF68696937DGHKK78FHF6
+    url: https://joernott.github.io/charts/signing_ott-consult.asc

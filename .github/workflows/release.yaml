@@ -23,7 +23,32 @@ jobs:
           git config user.name "$GITHUB_ACTOR"
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Install Helm
+        uses: azure/setup-helm@v4
+
+      - name: Prepare GPG key
+        run: |
+          GPG_DIR=.cr-gpg
+          mkdir "${GPG_DIR}"
+          KEYRING="${GPG_DIR}/secring.gpg"
+          base64 -d <<< "$GPG_KEYRING_BASE64" > "${KEYRING}"
+          PASSPHRASE_FILE="${GPG_DIR}/passphrase"
+          echo "${GPG_PASSPHRASE}" > "${PASSPHRASE_FILE}"
+          echo "CR_PASSPHRASE_FILE=${PASSPHRASE_FILE}" >> "$GITHUB_ENV"
+          echo "CR_KEYRING=${KEYRING}" >> "$GITHUB_ENV"
+        env:
+          GPG_KEYRING_BASE64: "${{ secrets.GPG_KEYRING_BASE64 }}"
+          GPG_PASSPHRASE: "${{ secrets.GPG_PASSPHRASE }}"
+
+      - name: Add repositories
+        run: |
+          for DIR in $(ls -d charts/*/); do
+            helm dependency list "${DIR}" 2> /dev/null | tail +2 | head -n -1 | awk '{ print "helm repo add " $1 " " $3 }' | while read CMD; do ${CMD}; done
+          done
+
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.7.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_KEY: "${{ secrets.CR_KEY }}"
+          CR_SIGN: true
