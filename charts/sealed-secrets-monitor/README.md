@@ -1,6 +1,6 @@
 # sealed-secrets-monitor
 
-![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.33.3](https://img.shields.io/badge/AppVersion-1.33.3-informational?style=flat-square)
+![Version: 0.1.2](https://img.shields.io/badge/Version-0.1.2-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.33.3](https://img.shields.io/badge/AppVersion-1.33.3-informational?style=flat-square)
 
 Helm chart to create a job that waits for [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) to unseal.
 It can be used in conjunction with [Argo CD](https://argo-cd.readthedocs.io/en/stable/) to wait not only for the
