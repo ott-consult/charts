@@ -1,6 +1,6 @@
 # sealed-secrets-monitor
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.33.2](https://img.shields.io/badge/AppVersion-1.33.2-informational?style=flat-square)
+![Version: 0.1.1](https://img.shields.io/badge/Version-0.1.1-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 1.33.3](https://img.shields.io/badge/AppVersion-1.33.3-informational?style=flat-square)
 
 Helm chart to create a job that waits for [sealed-secrets](https://github.com/bitnami-labs/sealed-secrets) to unseal.
 It can be used in conjunction with [Argo CD](https://argo-cd.readthedocs.io/en/stable/) to wait not only for the
@@ -41,10 +41,10 @@ helm repo add joernott https://joernott.github.io/charts --force-update
 | configMap.name | string | a name is generated using the fullname template | The name of the config map storing the env var and script. |
 | extraObjects | list | `[]` | Array of extra K8s manifests to deploy # Note: Supports use of custom Helm templates |
 | fullnameOverride | string | `""` |  |
-| image.hash | string | `"@sha256:e706851b19c0c4e668614b7c5a6b0c5bbcfbe7fb73f5d999250e0da8bfff42c6"` | Hash of the specific container image for that version |
+| image.hash | string | `"sha256:cd354d5b25562b195b277125439c23e4046902d7f1abc0dc3c75aad04d298c17"` | Hash of the specific container image for that version |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"docker.io/bitnami/kubectl"` | Container image containing kubectl |
-| image.tag | string | `"1.33.2"` | Version of the container image containing kubectl |
+| image.tag | string | `"1.33.3"` | Version of the container image containing kubectl |
 | imagePullSecrets | list | `[]` |  |
 | job.annotations | object | `{}` | Annotations to add to the config map |
 | job.name | string | a name is generated using the fullname template | The name of the monitoring job waiting for sealed secrets to unpack. |
