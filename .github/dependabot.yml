@@ -4,7 +4,8 @@
 version: 2
 updates:
 - package-ecosystem: "helm"
-  directory: "/charts"
+  directories:
+    - "/charts/*"
   schedule:
     interval: "daily"
 - package-ecosystem: "github-actions"
